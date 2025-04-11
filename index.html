@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#252525">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="src/css/style.css">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+        <script src="https://kit.fontawesome.com/845ff96034.js" crossorigin="anonymous"></script>
+        <title>Dinheiro para Tempo</title>
+    </head>
+    <body>
+        <div class="container">
+            <main class="main">
+                <div class="stopwatch">
+                    <time datetime="00:00:00" id="timer">00:00:00</time>
+                </div>
+                <section class="input-section">
+                    <div class="input-group">
+                        <span class="detail">R$</span>
+                        <input type="text" class="initial-money" id="initial-money">
+                    </div>
+                    <div class="input-group">
+                        <span class="detail">+ R$</span>
+                        <input type="text" class="add-money" id="add-money">
+                        <button class="confirm" title="Confirmar">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </button>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script src="src/js/script.js"></script>
+    </body>
+</html>
