@@ -22,6 +22,13 @@ function setupMoneyInput(input, onInputCallback) {
         }
     })
 
+    input.addEventListener("focus", () => {
+        // Coloca o cursor no final do valor formatado
+        setTimeout(() => {
+            input.setSelectionRange(input.value.length, input.value.length)
+        }, 0)
+    })
+
     input.addEventListener("blur", () => {
         if (rawValue === "") {
             input.value = "0,00"

@@ -94,6 +94,7 @@ body {
     display: block;
     text-wrap: nowrap;
     color: var(--primary-color);
+    user-select: none;
 }
 
 .input-section .input-group input {
