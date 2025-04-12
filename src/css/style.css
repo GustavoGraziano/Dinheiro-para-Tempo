@@ -11,6 +11,7 @@
     --grey-color: #545454;
     --bg-body: #252525;
     --bg-main-content: #202020;
+    --delete-color: #ff4646;
 }
 
 ::selection {
@@ -106,7 +107,7 @@ body {
     border: none;
 }
 
-.input-section .input-group .confirm {
+.input-section .input-group .confirm, .input-section .input-group .delete {
     font-size: inherit;
     color: var(--grey-color);
     background: none;
@@ -117,6 +118,10 @@ body {
 
 .input-section .input-group .confirm:hover {
     color: var(--primary-color);
+}
+
+.input-section .input-group .delete:hover {
+    color: var(--delete-color);
 }
 
 .options {

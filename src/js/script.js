@@ -1,7 +1,8 @@
 const timerDisplay = document.getElementById("timer");
 const initialMoneyInput = document.getElementById("initial-money");
 const addMoneyInput = document.getElementById("add-money");
-const confirmButton = document.querySelector(".confirm");
+const confirmButton = document.getElementById("confirm");
+const deleteButton = document.getElementById("delete");
 const convertCentavosCheckbox = document.getElementById("convert-centavos");
 const convertAnimCheckbox = document.getElementById("convert-anim");
 
@@ -123,6 +124,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const useCentavos = convertCentavosCheckbox.checked;
         updateTimer(moneyToSeconds(newValue, useCentavos));
+    });
+
+    const deleteButton = document.querySelector(".delete");
+
+    deleteButton.addEventListener("click", () => {
+        initialMoneyInput.value = "0,00";
+        totalSeconds = 0;
+        updateTimer(0);
     });
 
     // Mover cursor pro fim ao clicar no input

@@ -25,11 +25,14 @@
                     <div class="input-group">
                         <span class="detail">R$</span>
                         <input type="text" inputmode="numeric" class="initial-money" id="initial-money">
+                        <button class="delete" id="delete" title="Deletar">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
                     </div>
                     <div class="input-group">
                         <span class="detail">+ R$</span>
                         <input type="text" inputmode="numeric" class="add-money" id="add-money">
-                        <button class="confirm" title="Confirmar">
+                        <button class="confirm" id="confirm" title="Confirmar">
                             <i class="fa-solid fa-circle-check"></i>
                         </button>
                     </div>
@@ -38,7 +41,7 @@
                     <div class="convert-centavos">
                         <p>Converter Centavos</p>
                         <label class="check-container">
-                            <input type="checkbox" id="convert-centavos">
+                            <input type="checkbox" checked id="convert-centavos">
                             <span class="btn-check">
                                 <span class="check"></span>
                             </span>
@@ -47,7 +50,7 @@
                     <div class="convert-centavos">
                         <p>Animação da Conversão</p>
                         <label class="check-container">
-                            <input type="checkbox" id="convert-anim">
+                            <input type="checkbox" checked id="convert-anim">
                             <span class="btn-check">
                                 <span class="check"></span>
                             </span>
