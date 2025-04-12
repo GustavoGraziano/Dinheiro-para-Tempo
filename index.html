@@ -21,45 +21,46 @@
                 <div class="stopwatch">
                     <time datetime="00:00:00" id="timer">00:00:00</time>
                 </div>
-                <section class="input-section">
+
+                <section class="money-section">
                     <div class="input-group">
-                        <span class="detail">R$</span>
-                        <input type="text" inputmode="numeric" class="initial-money" id="initial-money">
-                        <button class="delete" id="delete" title="Deletar">
+                        <span class="currency-label">R$</span>
+                        <input type="text" inputmode="numeric" class="money-input-initial" id="money-input-initial">
+                        <button class="btn-delete tooltip top" id="btn-delete" data-tooltip="Deletar">
                             <i class="fa-solid fa-circle-xmark"></i>
                         </button>
                     </div>
                     <div class="input-group">
-                        <span class="detail">+ R$</span>
-                        <input type="text" inputmode="numeric" class="add-money" id="add-money">
-                        <button class="confirm" id="confirm" title="Confirmar">
+                        <span class="currency-label">+ R$</span>
+                        <input type="text" inputmode="numeric" class="money-input-add" id="money-input-add">
+                        <button class="btn-confirm tooltip top" id="btn-confirm" data-tooltip="Confirmar">
                             <i class="fa-solid fa-circle-check"></i>
                         </button>
                     </div>
                 </section>
+
                 <section class="options">
-                    <div class="convert-centavos">
+                    <div class="option-toggle">
                         <p>Converter Centavos</p>
-                        <label class="check-container">
-                            <input type="checkbox" checked id="convert-centavos">
-                            <span class="btn-check">
-                                <span class="check"></span>
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked id="toggle-cents">
+                            <span class="checkbox-button">
+                                <span class="checkmark"></span>
                             </span>
                         </label>
                     </div>
-                    <div class="convert-centavos">
+                    <div class="option-toggle">
                         <p>Animação da Conversão</p>
-                        <label class="check-container">
-                            <input type="checkbox" checked id="convert-anim">
-                            <span class="btn-check">
-                                <span class="check"></span>
+                        <label class="checkbox-container">
+                            <input type="checkbox" checked id="toggle-animation">
+                            <span class="checkbox-button">
+                                <span class="checkmark"></span>
                             </span>
                         </label>
                     </div>
                 </section>
             </main>
         </div>
-
         <script src="src/js/script.js"></script>
     </body>
 </html>
