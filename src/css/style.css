@@ -118,3 +118,48 @@ body {
 .input-section .input-group .confirm:hover {
     color: var(--primary-color);
 }
+
+.options {
+    width: 100%;
+}
+
+.options .convert-centavos {
+    color: var(--white-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options input[type="checkbox"] {
+    display: none;
+}
+
+.options .check-container .btn-check {
+    display: flex;
+    align-items: center;
+    width: 4rem;
+    height: 2rem;
+    background-color: var(--grey-color);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.3rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.options .check-container .btn-check .check {
+    aspect-ratio: 1/1;
+    height: 100%;
+    background-color: var(--bg-main-content);
+    border-radius: 50%;
+    margin-left: 0;
+    transition: margin 0.3s;
+}
+
+.options .check-container input:checked + .btn-check .check {
+    margin-left: calc(100% - 1.4rem);
+}
+
+.options .check-container input:checked + .btn-check {
+    background-color: var(--primary-color);
+}

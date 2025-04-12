@@ -9,53 +9,28 @@ function formatToMoney(value) {
     return formatted.replace("R$", "").trim()
 }
 
-function setupMoneyInput(input, onInputCallback) {
-    let rawValue = ""
-
-    input.addEventListener("input", (e) => {
-        const newValue = e.target.value.replace(/\D/g, "")
-        rawValue = newValue
-        input.value = formatToMoney(rawValue)
-
-        if (onInputCallback) {
-            onInputCallback(getFloatFromFormatted(input.value))
-        }
-    })
-
-    input.addEventListener("focus", () => {
-        // Coloca o cursor no final do valor formatado
-        setTimeout(() => {
-            input.setSelectionRange(input.value.length, input.value.length)
-        }, 0)
-    })
-
-    input.addEventListener("blur", () => {
-        if (rawValue === "") {
-            input.value = "0,00"
-        }
-    })
-
-    if (input.value.trim() === "") {
-        input.value = "0,00"
-    }
-}
-
 function getFloatFromFormatted(value) {
-    return parseFloat(value.replace(/\./g, "").replace(",", "."))
+    const cleaned = value.replace(/\./g, "").replace(",", ".")
+    return parseFloat(cleaned) || 0
 }
 
-function converterReaisParaTempo(valor) {
-    const totalMinutos = parseFloat(valor)
-    const horas = Math.floor(totalMinutos / 60)
-    const minutos = Math.floor(totalMinutos % 60)
-    const segundos = Math.round((totalMinutos % 1) * 60)
+function converterReaisParaTempo(valor, incluirCentavos = true) {
+    const totalSegundos = incluirCentavos
+        ? Math.floor(valor * 60)
+        : Math.floor(valor) * 60
+
+    const horas = Math.floor(totalSegundos / 3600)
+    const minutos = Math.floor((totalSegundos % 3600) / 60)
+    const segundos = totalSegundos % 60
 
     return { horas, minutos, segundos }
 }
 
 function atualizarTimerComValor(valor) {
     const timer = document.getElementById("timer")
-    const { horas, minutos, segundos } = converterReaisParaTempo(valor)
+    const converterCentavos = document.getElementById("convert-centavos").checked
+
+    const { horas, minutos, segundos } = converterReaisParaTempo(valor, converterCentavos)
 
     const h = String(horas).padStart(2, "0")
     const m = String(minutos).padStart(2, "0")
@@ -67,37 +42,62 @@ function atualizarTimerComValor(valor) {
     timer.setAttribute("datetime", tempoFormatado)
 }
 
+function setupMoneyInput(input, onInputCallback) {
+    let rawValue = ""
+
+    input.addEventListener("input", (e) => {
+        const newValue = e.target.value.replace(/\D/g, "")
+        rawValue = newValue
+        input.value = formatToMoney(rawValue)
+
+        if (onInputCallback && input.id === "initial-money") {
+            const valor = getFloatFromFormatted(input.value)
+            onInputCallback(valor)
+        }
+    })
+
+    input.addEventListener("blur", () => {
+        if (rawValue === "") {
+            input.value = "0,00"
+        }
+    })
+
+    // Forçar o cursor ao final do input
+    input.addEventListener("focus", () => {
+        const length = input.value.length
+        setTimeout(() => {
+            input.setSelectionRange(length, length)
+        }, 0)
+    })
+
+    if (input.value.trim() === "") {
+        input.value = "0,00"
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const initialMoneyInput = document.getElementById("initial-money")
     const addMoneyInput = document.getElementById("add-money")
     const confirmButton = document.querySelector(".confirm")
+    const checkbox = document.getElementById("convert-centavos")
 
-    // Atualiza timer com initialMoney automaticamente ao digitar
-    setupMoneyInput(initialMoneyInput, (valor) => {
+    setupMoneyInput(initialMoneyInput, atualizarTimerComValor)
+    setupMoneyInput(addMoneyInput)
+
+    checkbox.addEventListener("change", () => {
+        const valor = getFloatFromFormatted(initialMoneyInput.value)
         atualizarTimerComValor(valor)
     })
 
-    // Formata o addMoneyInput, mas sem atualizar o timer
-    setupMoneyInput(addMoneyInput)
-
-    // Botão de confirmação da adição de valor
     confirmButton.addEventListener("click", () => {
-        const initialValue = getFloatFromFormatted(initialMoneyInput.value)
-        const addValue = getFloatFromFormatted(addMoneyInput.value)
+        const valorInicial = getFloatFromFormatted(initialMoneyInput.value)
+        const valorAdicionar = getFloatFromFormatted(addMoneyInput.value)
 
-        const novoTotal = initialValue + addValue
+        const novoValor = valorInicial + valorAdicionar
 
-        // Atualiza o input inicial com o novo valor somado
-        initialMoneyInput.value = formatToMoney(novoTotal.toFixed(2))
-
-        // Atualiza o cronômetro com o novo total
-        atualizarTimerComValor(novoTotal)
-
-        // Zera o campo de adição
+        initialMoneyInput.value = formatToMoney((novoValor * 100).toFixed(0))
         addMoneyInput.value = "0,00"
-    })
 
-    // Ao carregar, mostra o timer com o valor inicial
-    const valorInicial = getFloatFromFormatted(initialMoneyInput.value)
-    atualizarTimerComValor(valorInicial)
+        atualizarTimerComValor(novoValor)
+    })
 })
