@@ -1,3 +1,4 @@
+const stopwatch = document.getElementById("stopwatch");
 const timerDisplay = document.getElementById("timer");
 const initialMoneyInput = document.getElementById("money-input-initial");
 const addMoneyInput = document.getElementById("money-input-add");
@@ -129,6 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteButton.addEventListener("click", () => {
         initialMoneyInput.value = "0,00";
         totalSeconds = 0;
+
+        stopwatch.classList.add('reset-timer')
+        setTimeout(() => {
+            stopwatch.classList.remove('reset-timer')
+        }, 300);
+        
         updateTimer(0);
     });
 

@@ -81,6 +81,12 @@ body {
     border: 1rem solid var(--primary-color);
     box-shadow: 0.2rem 0.2rem 0.6rem var(--shadow-color);
     border-radius: 50%;
+    transition: color var(--transition-time), border var(--transition-time);
+}
+
+.stopwatch.reset-timer {
+    color: var(--danger-color);
+    border: 1rem solid var(--danger-color);
 }
 
 .money-section {
